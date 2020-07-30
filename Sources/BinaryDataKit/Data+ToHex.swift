@@ -1,5 +1,5 @@
 //
-//  Copyright © 2016 Apparata AB. All rights reserved.
+//  Copyright © 2020 Apparata AB. All rights reserved.
 //
 
 import Foundation
@@ -8,7 +8,7 @@ import Foundation
 
 public extension NSData {
     
-    private func toHex() -> String? {
+    func toHex() -> String? {
         guard length > 0 else {
             return nil
         }

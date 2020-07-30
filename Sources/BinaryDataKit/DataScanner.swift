@@ -1,5 +1,5 @@
 //
-//  Copyright © 2016 Apparata AB. All rights reserved.
+//  Copyright © 2020 Apparata AB. All rights reserved.
 //
 
 import Foundation
