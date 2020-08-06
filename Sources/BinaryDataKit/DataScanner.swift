@@ -196,6 +196,14 @@ open class DataScanner {
     public func scanUInt64() throws -> UInt64 {
         return try scanEndianedValue()
     }
+
+    #if os(iOS)
+    @available(iOS 14, *)
+    @discardableResult
+    public func scanFloat16() throws -> Float16 {
+        return try scanEndianedValue()
+    }
+    #endif
     
     @discardableResult
     public func scanFloat32() throws -> Float32 {
