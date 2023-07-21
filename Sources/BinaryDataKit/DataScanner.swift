@@ -135,18 +135,16 @@ open class DataScanner {
     
     @discardableResult
     public final func scanString(length: Int, encoding: String.Encoding = .utf8, nullTerminated: Bool = false) throws -> String {
-        let data = try scanData(length: length)
+        var data = try scanData(length: length)
+        if nullTerminated {
+            data = data.prefix(while: { byte in
+                byte != 0
+            })
+        }
         guard let string = String(data: data, encoding: encoding) else {
             throw Error.notValidString
         }
-        if nullTerminated {
-            guard let beforeNull = string.split(separator: "\0").first else {
-                return ""
-            }
-            return String(beforeNull)
-        } else {
-            return string
-        }
+        return string
     }
     
     public final func scanString(_ string: String, encoding: String.Encoding = .utf8, nullTerminated: Bool = false) throws {
