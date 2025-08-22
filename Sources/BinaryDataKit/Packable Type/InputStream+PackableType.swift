@@ -4,8 +4,17 @@
 
 import Foundation
 
-public extension InputStream {
-    
+extension InputStream {
+
+    /// Reads a value of the specified `PackableType` from the input stream.
+    ///
+    /// This function reads the exact number of bytes required to represent the type `T` from the stream,
+    /// unpacks the bytes into the type `T`, and returns the value.
+    ///
+    /// - Returns: A value of type `T` read from the stream.
+    ///
+    /// - Note: Ensure that the stream is open before calling this method and closed afterwards.
+    ///
     /// Example:
     /// ```
     /// let stream = InputStream(data: data)
@@ -13,16 +22,25 @@ public extension InputStream {
     /// let value: Int32 = stream.readValue()
     /// stream.close()
     /// ```
-    func readValue<T: PackableType>() -> T {
+    ///
+    public func readValue<T: PackableType>() -> T {
         var buffer = [UInt8](repeating: 0, count: MemoryLayout<T>.size)
         read(&buffer, maxLength: buffer.count)
         let value = T.unpack(buffer)
         return value
     }
-    
-    func readString(length: Int) -> String {
+
+    /// Reads a string of the specified length from the input stream.
+    ///
+    /// - Parameter length: The number of bytes to read from the stream.
+    /// - Returns: A string constructed from the bytes read from the stream. If the length is zero
+    ///            or no valid UTF-8 string can be formed, returns an empty string.
+    ///
+    /// - Note: The string is expected to be UTF-8 encoded and null-terminated.
+    ///
+    public func readString(length: Int) -> String {
         var string = ""
-        
+
         if length > 0 {
             let readBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: length + 1)
             let bytesReadCount = self.read(readBuffer, maxLength: length)

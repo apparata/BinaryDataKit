@@ -1,19 +1,14 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.10
 
 import PackageDescription
 
 let package = Package(
     name: "BinaryDataKit",
     platforms: [
-        // Relevant platforms.
-        .iOS(.v13), .macOS(.v10_15), .tvOS(.v13)
+        .iOS(.v14), .macOS(.v12), .tvOS(.v14), .visionOS(.v1)
     ],
     products: [
         .library(name: "BinaryDataKit", targets: ["BinaryDataKit"])
-    ],
-    dependencies: [
-        // It's a good thing to keep things relatively
-        // independent, but add any dependencies here.
     ],
     targets: [
         .target(
