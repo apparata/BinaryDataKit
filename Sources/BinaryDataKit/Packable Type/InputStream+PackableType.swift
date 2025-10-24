@@ -47,7 +47,7 @@ extension InputStream {
             if bytesReadCount >= 0 {
                 readBuffer[bytesReadCount] = 0
                 readBuffer.withMemoryRebound(to: CChar.self, capacity: bytesReadCount * MemoryLayout<CChar>.size) {
-                    if let utf8String = String.init(validatingUTF8: $0) {
+                    if let utf8String = String(validatingCString: $0) {
                         string = utf8String
                     }
                 }
