@@ -303,6 +303,7 @@ open class DataScanner {
         return try scanEndianedValue()
     }
 
+    #if !arch(x86_64)
     /// Scans a `Float16` value from the current position.
     ///
     /// - Throws: `Error.outOfRange` if there is not enough data to read.
@@ -312,6 +313,7 @@ open class DataScanner {
     public func scanFloat16() throws -> Float16 {
         return try scanEndianedValue()
     }
+    #endif
 
     /// Scans a `Float32` value from the current position.
     ///
